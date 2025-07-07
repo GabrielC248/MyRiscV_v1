@@ -1,14 +1,6 @@
---------------------------------------------------------------------------------------
--- 32 bit 3:1 multiplexer								                            --
--- myRISCVv1  											                            --
---														                            --
--- Prof. Max Santana  (2025)                                                        --
--- CEComp/Univasf                                                                   --
---------------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 
 entity mux332 is
   port(	

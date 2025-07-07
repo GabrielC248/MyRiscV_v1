@@ -32,7 +32,7 @@ architecture behavior of rom is
 begin
   InitMem: process
     use std.textio.all;
-    file f: text open read_mode is "myRISCV_example1.bin";
+    file f: text open read_mode is "prog.bin";
     variable l: line;
     variable value: std_logic_vector(DATA_WIDTH-1 downto 0);
     variable i: integer := 0;

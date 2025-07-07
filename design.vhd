@@ -38,6 +38,9 @@ architecture rtl of design is
     -- execute
     signal aluResult  : std_logic_vector(31 downto 0);
 
+    -- ram
+    signal ramOut     : std_logic_vector(31 downto 0);
+
 begin
     
     instruction_fetch : entity work.ifetch
@@ -89,6 +92,40 @@ begin
         aluControl => aluControl,
         aluResult  => aluResult,
         zero       => zero
+    );
+
+    ROM_M: entity work.rom
+    generic map (
+        DATA_WIDTH    => 8,
+        ADDRESS_WIDTH => 16,
+        DEPTH         => 65535
+        )
+    port map (
+        a  => PCCurt,
+        rd => instr
+    );
+
+    RAM_M: entity work.ram
+    generic map (
+        DATA_WIDTH    => 8,
+        ADDRESS_WIDTH => 16,
+        DEPTH         => 65535
+        )
+    port map (
+        clk => clk,
+        a   => aluResult,
+        wd  => rd2,
+        we  => memWrite,
+        rd  => ramOut
+    );
+
+    MUX3: entity work.mux332
+    port map (
+        d0 => aluResult,
+        d1 => ramOut,
+        d2 => aluResult,
+        s => resultSrc,
+        y => wd
     );
 
 end architecture rtl;
