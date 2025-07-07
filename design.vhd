@@ -15,6 +15,7 @@ architecture rtl of design is
     signal PCSrc      : std_logic;
     signal imm        : std_logic_vector(31 downto 0);
     signal PCCurt     : std_logic_vector(31 downto 0);
+    signal PCPlus4    : std_logic_vector(31 downto 0);
 
     -- controller
     signal op         : std_logic_vector(6 downto 0);
@@ -49,7 +50,8 @@ begin
         rst => rst,
         PCSrc => PCSrc,
         imm => imm,
-        PCCurt => PCCurt
+        PCCurt => PCCurt,
+        PC4Out => PCPlus4
     );
 
     ctrl : entity work.controller
@@ -123,7 +125,7 @@ begin
     port map (
         d0 => aluResult,
         d1 => ramOut,
-        d2 => aluResult,
+        d2 => PCPlus4,
         s => resultSrc,
         y => wd
     );

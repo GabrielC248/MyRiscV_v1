@@ -8,7 +8,8 @@ entity ifetch is
     	rst    : in std_logic;
     	PCSrc  : in std_logic;
     	imm    : in std_logic_vector(31 downto 0);
-    	PCCurt : out std_logic_vector(31 downto 0) -- PC OUT
+    	PCCurt : out std_logic_vector(31 downto 0); -- PC OUT
+        PC4Out : out std_logic_vector(31 downto 0) -- PCPlus4 OUT
     );
 end entity ifetch;
 
@@ -52,5 +53,6 @@ architecture arch of ifetch is
     	);
 
 		PCCurt <= PCNew;
+        PC4Out <= PCPlus4;
 
 end architecture arch; -- OK
